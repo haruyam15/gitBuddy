@@ -9,7 +9,7 @@
     "useDefineForClassFields": true,
     "lib": ["ES2020"],
     "module": "NodeNext",
-    "moduleResolution": "nodenext",
+    "moduleResolution": "NodeNext",
     "skipLibCheck": true,
     "esModuleInterop": true,
     "strict": true,
