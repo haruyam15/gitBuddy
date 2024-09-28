@@ -5,7 +5,7 @@
   "main": "dist/src/index.js",
   "type": "module",
   "bin": {
-    "gitbuddy": "./bin/gitbuddy.ts"
+    "gitbuddy": "dist/bin/gitbuddy.js"
   },
   "scripts": {
     "build": "tsc",
