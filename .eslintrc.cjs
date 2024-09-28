@@ -13,7 +13,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'prettier', 'import'],
   rules: {
-    'no-console': ['warn', { allow: ['warn', 'error'] }],
+    'no-console': off,
     'prefer-const': 'error',
     'no-var': 'error',
     'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
