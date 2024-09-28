@@ -1,7 +1,7 @@
-// src/index.ts
 import validateRepo from './utils/validateRepo.js';
 import chalk from 'chalk';
 import inquirer from 'inquirer';
+import { exec } from 'child_process'; // exec 임포트 추가
 
 // Git 학습 세션 시작
 export const startSession = async () => {
@@ -61,9 +61,24 @@ const promptCloneCommand = async () => {
 
 // 클론 명령어 처리
 const handleCloneCommand = async (command: string) => {
-  const validationResponse = await validateRepo(command.split(' ')[2]); // 레포지토리 주소 유효성 검사
+  const repoUrl = command.split(' ')[2]; // 레포지토리 주소 추출
+  const validationResponse = await validateRepo(repoUrl); // 레포지토리 주소 유효성 검사
+
   if (validationResponse.valid) {
-    console.log(chalk.green('훌륭해요! 레포지토리를 성공적으로 클론했습니다.'));
+    console.log(chalk.green('레포지토리를 클론 중입니다...'));
+
+    // 실제 클론 명령어 실행
+    exec(command, (error, stderr) => {
+      if (error) {
+        console.error(chalk.red(`클론 실패: ${error.message}`));
+        return;
+      }
+      if (stderr) {
+        console.error(chalk.red(`오류: ${stderr}`));
+        return;
+      }
+      console.log(chalk.green('훌륭해요! 레포지토리를 성공적으로 클론했습니다.')); // 성공 메시지
+    });
   } else {
     console.log(chalk.red(validationResponse.message));
     await promptCloneCommand(); // 오류 시 재입력 요청

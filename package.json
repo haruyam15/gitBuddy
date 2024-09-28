@@ -2,7 +2,7 @@
   "name": "gitbuddy",
   "version": "1.0.0",
   "description": "Your buddy for mastering Git commands!",
-  "main": "index.js",
+  "main": "dist/src/index.js",
   "type": "module",
   "bin": {
     "gitbuddy": "./bin/gitbuddy.ts"
