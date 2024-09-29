@@ -14,9 +14,10 @@ const validateRepo = async (repoUrl: string) => {
   }
 
   const userName = match[1];
-  const repoName = match[2];
+  const repoName = match[2].replace(/\.git$/, '');
 
   // GitHub API를 사용하여 레포지토리 존재 여부 확인
+
   try {
     const response = await axios.get(`https://api.github.com/repos/${userName}/${repoName}`);
     if (response.status === 200) {
@@ -25,7 +26,7 @@ const validateRepo = async (repoUrl: string) => {
   } catch (error) {
     return {
       valid: false,
-      message: '레포지토리를 찾을 수 없는 것 같아요. 레포지토리 주소를 다시 확인해 주세요.',
+      message: '레포지토리를 찾을 수 없어요. 레포지토리 주소를 다시 확인해 주세요.',
     };
   }
 

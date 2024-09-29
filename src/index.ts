@@ -3,10 +3,16 @@ import chalk from 'chalk';
 import inquirer from 'inquirer';
 import { exec } from 'child_process'; // exec 임포트 추가
 
+let userName = '';
+
 // Git 학습 세션 시작
 export const startSession = async () => {
-  const userName = await promptUser();
-  console.log(chalk.green(`반갑습니다, ${userName}님! 제가 Git 사용을 도와드리겠습니다.`));
+  userName = await promptUser();
+  console.log(
+    chalk.green(`
+    반갑습니다 ${userName}님! 제가 Git 사용을 도와드리겠습니다. 😀
+    `)
+  );
 
   await guideClone();
 };
@@ -33,9 +39,17 @@ const promptUser = async (): Promise<string> => {
 // 클론 실습 안내
 const guideClone = async () => {
   console.log(chalk.blue('이제 git 레포지토리를 clone 해볼 거예요!'));
-  console.log(chalk.blue('아래 링크에서 레포지토리를 fork한 후, 주소를 입력해주세요:'));
+  console.log(
+    chalk.blue(
+      `아래 링크에서 레포지토리를 fork한 후, ${userName}님의 GitHub 레포지토리 주소를 입력해 주세요.`
+    )
+  );
   console.log(chalk.blue('https://github.com/haruyam15/gitbuddy-practice'));
-  console.log(chalk.blue('다음과 같은 형식으로 입력해보세요: git clone {주소}'));
+  console.log(
+    chalk.blue(
+      '다음과 같은 형식으로 입력해보세요: git clone https://github.com/{사용자ID}/{레포지토리이름}'
+    )
+  );
 
   await promptCloneCommand(); // 클론 명령어 입력 받기
 };
@@ -51,7 +65,7 @@ const promptCloneCommand = async () => {
         if (value.startsWith('git clone ') && value.split(' ').length === 3) {
           return true;
         }
-        return '올바른 형식이 아닙니다. "git clone {레포지토리 주소}" 형식으로 입력해 주세요.';
+        return '올바른 형식이 아닙니다. "git clone https://github.com/{사용자ID}/{레포지토리이름}" 형식으로 입력해 주세요.';
       },
     },
   ]);
@@ -77,7 +91,11 @@ const handleCloneCommand = async (command: string) => {
         console.error(chalk.red(`오류: ${stderr}`));
         return;
       }
-      console.log(chalk.green('훌륭해요! 레포지토리를 성공적으로 클론했습니다.')); // 성공 메시지
+      console.log(
+        chalk.green(`
+        ✨ 훌륭해요! 레포지토리를 성공적으로 클론했습니다. ✨ 
+        `)
+      );
     });
   } else {
     console.log(chalk.red(validationResponse.message));
