@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // 레포지토리 유효성 검사 함수
 const validateRepo = async (repoUrl: string) => {
-  const repoRegex = /https:\/\/github\.com\/([^\/]+)\/([^\/]+)/;
+  const repoRegex = /https:\/\/github\.com\/([^\/]+)\/([^\/]+)(\.git)?$/;
   const match = repoUrl.match(repoRegex);
 
   if (!match) {

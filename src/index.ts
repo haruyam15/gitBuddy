@@ -51,7 +51,7 @@ const promptCloneCommand = async () => {
         if (value.startsWith('git clone ') && value.split(' ').length === 3) {
           return true;
         }
-        return '올바른 형식이 아닙니다. "git clone {주소}" 형식으로 입력해 주세요.';
+        return '올바른 형식이 아닙니다. "git clone {레포지토리 주소}" 형식으로 입력해 주세요.';
       },
     },
   ]);
